@@ -4,18 +4,29 @@ public class Main{
     public static void main(String[] args){
         Scanner teclado = new Scanner(System.in);
 
-        boolean valido;
-        String frase;
-        String[] palavras;
+        boolean valido = true;
+        boolean codigo = true;
 
-        while (valido == True){
-            frase = teclado.nextLine();
-            if (frase == "*"){
+        while (codigo){
+            String frase = teclado.nextLine().toLowerCase();
+            if (frase.equals("*")){
                 break;
-            } else {
-                palavras = frase.split("\\s");
-                valido = True;
-                
+            }
+
+            String[] palavras = frase.split(" ");
+            char letra = palavras[0].charAt(0);
+
+            valido = true;
+            for (int a = 0; a < palavras.length; ++a){
+                if (palavras[a].charAt(0) != letra){
+                    System.out.println("N");
+                    valido = false;
+                    break;
+                }
+            }
+
+            if (valido) {
+                System.out.println("Y");
             }
         }
     }
