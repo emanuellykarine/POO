@@ -11,8 +11,7 @@ public class questao3{
             listaChar.add(inicial);
         }
 
-        String str = new String(listaChar);
-        return str;
+        return listaChar.toString();
     }
 
     public static void main(String[] args){
