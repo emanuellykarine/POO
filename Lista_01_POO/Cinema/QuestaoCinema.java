@@ -5,7 +5,7 @@ class Cinema{
     int horario;
 
     public double ingressoDia(){
-        if (dia.equals("Segunda") || dia.equals("Terça")|| dia.equals("Quinta") && horario > 17){
+        if (dia.equals("Segunda") || dia.equals("Terça")|| dia.equals("Quinta")){
             if (horario >= 17){
                 return 24;
             } else {
