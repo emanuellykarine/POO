@@ -3,17 +3,15 @@ import java.util.Scanner;
 class Circulo {
     // Atributo
     public int raio;
-    public double area;
-    public double circunferencia;
 
     // Método área
     public double area () {
-        return area = 3.14 * raio * raio;
+        return 3.14 * raio * raio;
     }
 
     // Método circunferencia
     public double circunferencia () {
-        return circunferencia = 2 * 3.14 * raio;
+        return 2 * 3.14 * raio;
     }
 }
 
