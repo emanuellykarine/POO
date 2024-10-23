@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Questao1 {
+public class questao2 {
     public static int maior (int x, int y, int z) {
         int maior;
         if (x > y & x > z) {
@@ -22,6 +22,7 @@ public class Questao1 {
         int y = teclado.nextInt();
         int z = teclado.nextInt();
 
+        teclado.close();
         System.out.println("O maior valor é: " + maior(x, y, z));
     }
 }
