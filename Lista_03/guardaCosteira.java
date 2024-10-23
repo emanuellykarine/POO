@@ -17,6 +17,7 @@ public class guardaCosteira{
             double tempoF = 12 / VF;
             double tempoG = distanciaGC / VG;
 
+            teclado.close();
             if (tempoG <= tempoF){
                 System.out.println("S");
             } else {

@@ -23,6 +23,8 @@ public class QuestaoCirculo{
         System.out.println("Digite o raio do círculo: ");
         dadosCirculo.raio = teclado.nextInt();
 
+        teclado.close();
+
         System.out.println(String.format("Área: %.2f", dadosCirculo.area()));
         System.out.println(String.format("Circunferencia: %.2f", dadosCirculo.circunferencia()));
     }

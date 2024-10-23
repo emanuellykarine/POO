@@ -14,6 +14,8 @@ public class salarioComBonus{
 
         double total = salario + (vendas * 0.15);
 
+        teclado.close();
+
         System.out.printf("TOTAL = R$ %.2f%n", total);
     }
 }

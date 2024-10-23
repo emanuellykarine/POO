@@ -44,6 +44,8 @@ public class QuestaoConta{
             novoSaldo = dadosConta.saque();
         }
 
+        teclado.close();
+
         System.out.println("Nome do titular: " + dadosConta.nome);
         System.out.println("Número da conta: " + dadosConta.numeroConta);
         System.out.println(String.format("Saldo atual: R$ %.2f", novoSaldo));

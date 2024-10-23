@@ -23,6 +23,8 @@ public class primoRapido{
                     primo = false; 
                 }
             }
+
+            teclado.close();
             
             if (primo){
                 System.out.println("Prime");

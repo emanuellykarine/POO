@@ -19,6 +19,8 @@ public class QuestaoViagem{
         v.distancia = teclado.nextInt();
         v.tempo = teclado.nextInt();
 
+        teclado.close();
+        
         System.out.println("Velocidade média: " + v.velocidade());
     }
 }
