@@ -37,6 +37,8 @@ public class QuestaoCinema{
         String[] horarios = horarioString.split(":");
         dadosCinema.horario = Integer.parseInt(horarios[0]);
 
+        teclado.close();
+
         System.out.println(String.format("Valor do ingresso = R$ %.2f", dadosCinema.ingressoDia()));
     }
 }
