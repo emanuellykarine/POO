@@ -1,7 +1,7 @@
 import java.text.NumberFormat;
 import java.util.Scanner;
 
-public class Main{
+public class salarioComBonus{
     public static void main(String[] args) {
 
         Scanner teclado = new Scanner(System.in);

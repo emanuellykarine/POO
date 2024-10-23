@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.math.*;
 
-public class Main {
+public class oMaior {
     public static void main(String[] args){
 
         Scanner teclado = new Scanner(System.in);
