@@ -25,12 +25,10 @@ public class Conta {
         }
 
         public double deposito(double valor){
-            System.out.println("Digite o valor que deseja depositar: ");
             return saldo + valor;
         }
 
         public double saque(double valor){
-            System.out.println("Digite o valor que deseja depositar: ");
             if (valor > saldo){
                 throw new IllegalArgumentException("O valor ultrapassa saldo da conta.");
             } else {

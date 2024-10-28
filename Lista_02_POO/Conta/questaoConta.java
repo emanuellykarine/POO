@@ -20,12 +20,14 @@ public class questaoConta {
         int op = input.nextInt();
 
         double novoSaldo = 0;
-        if (op == 1){
+        if (op == 2){
+            System.out.println("Digite o valor que deseja depositar: ");
             novoSaldo = c.deposito(input.nextDouble());
         } else {
+            System.out.println("Digite o valor que deseja sacar: ");
             novoSaldo = c.saque(input.nextDouble());
         }
     
-        System.out.println(novoSaldo);
+        System.out.println(String.format("Seu saldo atual: R$ %.2f", novoSaldo));
     }
 }
