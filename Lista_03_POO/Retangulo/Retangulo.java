@@ -5,8 +5,10 @@ public class Retangulo {
     private double h;
 
     public Retangulo(double b, double h){
-        b = 0;
-        h = 0;
+        // b = 0;
+        // h = 0;
+        setBase(b);
+        setAltura(h);
     }
 
     public void setBase(double b){
@@ -36,6 +38,6 @@ public class Retangulo {
     }
 
     public String toString(){
-        return (String.format("Base = ", this.b, "Altura = ", this.h));
+        return (String.format("Base = %.2f \nAltura  = %.2f", this.b, this.h));
     }
 }
