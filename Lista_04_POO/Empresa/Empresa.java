@@ -18,15 +18,19 @@ public class Empresa{
     }
 
     public void inserir (Cliente c){
-        clientes.add(c);
+        if (!clientes.contains(c)){
+            clientes.add(c);
+        } else {
+            throw new IllegalArgumentException("Cliente já cadastrado.");
+        }
     }
 
     public Cliente[] listar(){
-        return listar.toArray(new Cliente[0]);
+        return clientes.toArray(new Cliente[0]);
     }
 
     public String toString(){
-        return String.format("A empresa %s tem &d clientes.", nome, clientes.size());
+        return String.format("A empresa " + nome + " tem " + clientes.size() + " clientes.");
     }
 
 }
