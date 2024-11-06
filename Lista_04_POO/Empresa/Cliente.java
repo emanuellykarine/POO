@@ -11,20 +11,23 @@ public class Cliente{
     }
 
     public void setSocio(Cliente c){
-        this.limite += c.limite;
-        c.limite = this.limite;
         socio = c;
+        c = socio;
     }
 
     public double getLimite(){
-        return this.limite;
+        if (socio  == null){
+            return this.limite;
+        } else {
+            return this.limite + socio.limite;
+        }       
     }
 
     public String toString(){
         if (this.socio != null){
-            return String.format("Cliente Nome = %s, CPF = %s, Limite = R$ %s \nSocio(a) de %s: Nome = %s CPF = %s", this.nome, this.cpf, this.limite, this.nome, socio.nome, socio.cpf);
+            return String.format("Cliente Nome = %s, CPF = %s, Limite Individual= R$ %s \nSocios: Nome = %s CPF = %s    Nome = %s CPF = %s Limite compartilhado = %s", this.nome, this.cpf, this.limite, this.nome, this.cpf, socio.nome, socio.cpf, getLimite());
         } else {
-            return String.format("Cliente Nome = %s, CPF = %s, Limite = R$ %s", nome, cpf, limite);
+            return String.format("Cliente Nome = %s, CPF = %s, Limite Individual = R$ %s", nome, cpf, limite);
         }
     }
 }
