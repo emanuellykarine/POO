@@ -13,7 +13,9 @@ public static class Clientes{
     }
 
     public Cliente listarID(int id){
-
+        if (objetos.id == id){
+            return objetos;
+        }
     }
 
     public void atualizar(Cliente obj){
@@ -21,7 +23,7 @@ public static class Clientes{
     }
 
     public void excluir(Cliente obj){
-
+        objetos.remove(obj);
     }
 
     public void abrir(){
