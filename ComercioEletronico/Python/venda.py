@@ -1,25 +1,61 @@
+import json
+
 class Venda:
-    def __init__(self, id, data, carrinho, total, idCliente):
+    def __init__(self, id):
         self.set_id(id)
-        self.set_data(data)
-        self.set_carrinho(carrinho)
-        self.set_total(total)
-        self.set_idCliente(idCliente)
 
     def set_id(self, id):
-        self.id = id
+        self.__id = id
     
     def set_data(self, data):
-        self.data = data
+        self.__data = data
 
     def set_carrinho(self, carrinho):
-        self.carrinho = carrinho
+        self.__carrinho = carrinho
     
     def set_total(self, total):
-        self.total = total
+        self.__total = total
     
     def set_idCliente(self, idCliente):
-        self.idCliente = idCliente
+        self.__idCliente = idCliente
+
+    def get_id(self):
+        return self.__id
+
+    def get_data(self):
+        return self.__data
+
+    def get_carrinho(self):
+        return self.__carrinho
+
+    def get_total(self):
+        return self.__total
+    
+    def get_idCliente(self):
+        return self.__idCliente
 
     def __str__(self):
-        return f"{self.id} - {self.data} - {self.carrinho} - {self.total} - {self.idCliente}"
+        return f"{self.__id} - {self.__data} - {self.__carrinho} - {self.__total} - {self.__idCliente}"
+
+class Vendas:
+    objetos = []
+
+    @classmethod
+    def inserir(cls, obj):
+        cls.objetos.append(obj)
+
+    @classmethod
+    def listar(cls):
+        return cls.objetos
+    
+    @classmethod
+    def listar_id(cls, id):
+        venda_listar= None
+        for venda in cls.objetos:
+            if venda.id == id:
+                venda_listar = venda
+                
+        if venda_listar:
+            return venda_listar
+        else:
+            print("Venda não cadastrada")

@@ -8,28 +8,28 @@ class Cliente:
         self.set_fone(fone)
     
     def set_id(self, id):
-        self.id = id
+        self.__id = id
 
     def set_nome(self, n):
-        self.nome = n
+        self.__nome = n
     
     def set_email(self, e):
-        self.email = e
+        self.__email = e
     
     def set_fone(self, f):
-        self.fone = f
+        self.__fone = f
 
     def get_nome(self):
-        return self.nome
+        return self.__nome
 
     def get_email(self):
-        return self.email
+        return self.__email
     
     def get_fone(self):
-        return self.fone
+        return self.__fone
     
     def __str__(self):
-        return f"{self.id} - {self.nome} - {self.email} - {self.fone}"
+        return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone}"
     
 class Clientes:
     objetos = []
