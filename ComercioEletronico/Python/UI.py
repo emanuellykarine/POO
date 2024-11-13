@@ -21,17 +21,21 @@ class UI:
 
     @classmethod 
     def inserir_cliente(cls):
-        id = int(input("Informe o id: "))
         nome = input("Informe o nome: ")
         email = input("Informe o email: ")
         fone = input("Informe o fone: ")
-        cliente = Cliente(id, nome, email, fone)
+        cliente = Cliente(0, nome, email, fone)
         Clientes.inserir(cliente)
 
     @classmethod
     def atualizar_cliente(cls):
+        cls.listar_clientes()
         id = int(input("Qual o id do cliente que você deseja alterar os dados: "))
-        Clientes.atualizar(id)
+        nome = input("Novo nome: ")
+        email = input("Novo email: ")
+        fone = input("Novo telefone: ")
+        cliente = Cliente(id, nome, email, fone)
+        Clientes.atualizar(cliente)
 
     @classmethod 
     def listar_clientes(cls):

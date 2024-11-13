@@ -1,7 +1,7 @@
 import json
 
 class Cliente:
-    def __init__(self, id, nome, email, fone):
+    def __init__(self, id, nome, email, fone): #atributo de instancia
         self.set_id(id)
         self.set_nome(nome)
         self.set_email(email)
@@ -32,14 +32,24 @@ class Cliente:
         return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone}"
     
 class Clientes:
-    objetos = []
+    objetos = [] #atributos de classe cls - forma de acessar o atributo da classe 
 
     @classmethod
     def inserir(cls, obj):
+        cls.abrir()
+        
+        #calcular o id do objeto
+        id = 0
+        for cliente in cls.objetos:
+            if cliente.id > id: id = cliente.id
+        obj.id = id + 1
+
         cls.objetos.append(obj)
+        cls.salvar()
 
     @classmethod
     def listar(cls):
+        cls.abrir()
         return cls.objetos
     
     @classmethod
@@ -55,21 +65,24 @@ class Clientes:
             print("Cliente não existe")
 
     @classmethod
-    def atualizar(cls, id):
+    def atualizar(cls, obj):
+        cls.abrir()
         cliente_atualizar= None
         for cliente in cls.objetos:
-            if cliente.id == id:
+            if cliente.id == obj.id:
                 cliente_atualizar = cliente
                 
         if cliente_atualizar:
-            email = input("Alterar email: ")
-            fone = input("Alterar telefone: ")
-            cliente_atualizar = Cliente(id, cliente.nome, email, fone)
+            cliente.nome = obj.nome
+            cliente.email = obj.email
+            cliente.fone = obj.fone
         else:
             print("Cliente não existe")
+        cls.salvar()
 
     @classmethod
     def excluir(cls, id):
+        cls.abrir()
         cliente_excluir = None
         for cliente in cls.objetos:
             if cliente.id == id:
@@ -80,17 +93,22 @@ class Clientes:
             print("Cliente removido")
         else:
             print("Cliente não existe")
+        cls.salvar()
 
     @classmethod
     def salvar(cls):
         with open("clientes.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default = vars)
-
+            json.dump(cls.objetos, arquivo, default = vars) #vars - converte um objeto em dicionario
+            #dump - pega a lista de obejtos e salva no arquivo
+            
     @classmethod
     def abrir(cls):
         cls.objetos = []
-        with open("clientes.json", mode="r") as arquivo:
-            clientes_json = json.load(arquivo)
-            for obj in clientes_json:
-                c = Cliente(obj["id"], obj["nome"], obj["email"], obj["fone"])
-                cls.objetos.append(c)    
+        try:
+            with open("clientes.json", mode="r") as arquivo:
+                clientes_json = json.load(arquivo)
+                for obj in clientes_json:
+                    c = Cliente(obj["id"], obj["nome"], obj["email"], obj["fone"])
+                    cls.objetos.append(c)    
+        except FileNotFoundError:
+            pass
