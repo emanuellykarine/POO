@@ -28,8 +28,16 @@ class Cliente:
     def get_fone(self):
         return self.__fone
     
+    def get_id(self):
+        return self.__id
+    
     def __str__(self):
-        return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone}"
+        return f"{self.get_id()} - {self.get_nome()} - {self.get_email()} - {self.get_fone()}"
+    
+    def to_dict(self):
+        return {
+            "id": self.get_id(), "nome": self.get_nome(), "email": self.get_email(), "fone": self.get_fone()
+        }
     
 class Clientes:
     objetos = [] #atributos de classe cls - forma de acessar o atributo da classe 
@@ -41,8 +49,8 @@ class Clientes:
         #calcular o id do objeto
         id = 0
         for cliente in cls.objetos:
-            if cliente.id > id: id = cliente.id
-        obj.id = id + 1
+            if cliente.get_id() > id: id = cliente.get_id()
+        obj.set_id(id + 1)
 
         cls.objetos.append(obj)
         cls.salvar()
@@ -54,51 +62,31 @@ class Clientes:
     
     @classmethod
     def listar_id(cls, id):
-        cliente_listar= None
+        cls.abrir()
+        # percorre a lista procurando o id    
         for cliente in cls.objetos:
-            if cliente.id == id:
-                cliente_listar = cliente
-                
-        if cliente_listar:
-            return cliente_listar
-        else:
-            print("Cliente não existe")
+            if cliente.id == id: return cliente
+        return None
 
     @classmethod
     def atualizar(cls, obj):
-        cls.abrir()
-        cliente_atualizar= None
-        for cliente in cls.objetos:
-            if cliente.id == obj.id:
-                cliente_atualizar = cliente
-                
-        if cliente_atualizar:
-            cliente.nome = obj.nome
-            cliente.email = obj.email
-            cliente.fone = obj.fone
-        else:
-            print("Cliente não existe")
-        cls.salvar()
+        cliente = cls.listar_id(obj.id)
+        if cliente != None:
+            cls.objetos.remove(cliente)
+            cls.objetos.append(obj)
+            cls.salvar()
 
     @classmethod
-    def excluir(cls, id):
-        cls.abrir()
-        cliente_excluir = None
-        for cliente in cls.objetos:
-            if cliente.id == id:
-                cliente_excluir = cliente
-                
-        if cliente_excluir:
-            cls.objetos.remove(cliente_excluir)
-            print("Cliente removido")
-        else:
-            print("Cliente não existe")
-        cls.salvar()
+    def excluir(cls, obj):
+        cliente = cls.listar_id(obj.id)
+        if cliente != None:
+            cls.objetos.remove(cliente)
+            cls.salvar()
 
     @classmethod
     def salvar(cls):
         with open("clientes.json", mode="w") as arquivo:
-            json.dump(cls.objetos, arquivo, default = vars) #vars - converte um objeto em dicionario
+            json.dump([cliente.to_dict() for cliente in cls.objetos], arquivo, indent=4) #vars - converte um objeto em dicionario
             #dump - pega a lista de obejtos e salva no arquivo
             
     @classmethod

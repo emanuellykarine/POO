@@ -35,8 +35,8 @@ class Venda:
         return self.__idCliente
 
     def __str__(self):
-        return f"{self.__id} - {self.__data} - {self.__carrinho} - {self.__total} - {self.__idCliente}"
-
+        return f"{self.get_id()} - {self.get_data()} - {self.get_carrinho()} - {self.get_total()} - {self.get_idCliente()}"
+    
 class Vendas:
     objetos = []
 
@@ -52,7 +52,7 @@ class Vendas:
     def listar_id(cls, id):
         venda_listar= None
         for venda in cls.objetos:
-            if venda.id == id:
+            if venda.get_id() == id:
                 venda_listar = venda
                 
         if venda_listar:

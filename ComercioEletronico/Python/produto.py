@@ -25,17 +25,89 @@ class Produto:
     def get_id(self):
         return self.__id
     
-    def set_descricao(self):
+    def get_descricao(self):
         return self.__descricao
     
-    def set_preco(self):
+    def get_preco(self):
         return self.__preco
 
-    def set_estoque(self):
+    def get_estoque(self):
         return self.__estoque
     
-    def set_idCategoria(self):
+    def get_idCategoria(self):
         return self.__idCategoria
     
     def __str__(self):
-        return f"{self.__id} - {self.__descricao} - {self.__preco} - {self.__estoque} - {self.__idCategoria}"
+        return f"{self.get_id()} - {self.get_descricao()} - {self.get_preco()} - {self.get_estoque()} - {self.get_idCategoria()}"
+    
+    def to_dict(self):
+        return {
+            "id": self.get_id(), 
+            "descricao": self.get_descricao(), 
+            "preço": self.get_preco(), 
+            "estoque": self.get_estoque(), 
+            "id categoria": self.get_idCategoria()
+        }
+    
+class Produtos:
+    objetos = [] #atributos de classe cls - forma de acessar o atributo da classe 
+
+    @classmethod
+    def inserir(cls, obj):
+        cls.abrir()
+        
+        #calcular o id do objeto
+        id = 0
+        for produto in cls.objetos:
+            if produto.get_id() > id: id = produto.get_id()
+        obj.set_id(id + 1)
+
+        cls.objetos.append(obj)
+        cls.salvar()
+
+    @classmethod
+    def listar(cls):
+        cls.abrir()
+        return cls.objetos
+    
+    @classmethod
+    def listar_id(cls, id):
+        cls.abrir()
+        # percorre a lista procurando o id    
+        for produto in cls.objetos:
+            if produto.get_id() == id: return produto
+        return None
+
+    @classmethod
+    def atualizar(cls, obj):
+        produto = cls.listar_id(obj.get_id())
+        if produto != None:
+            cls.objetos.remove(produto)
+            cls.objetos.append(obj)
+            cls.salvar()
+
+    @classmethod
+    def excluir(cls, obj):
+        produto = cls.listar_id(obj.get_id())
+        if produto != None:
+            cls.objetos.remove(produto)
+            cls.salvar()
+
+    @classmethod
+    def salvar(cls):
+        with open("produtos.json", mode="w") as arquivo:
+            json.dump([produto.to_dict() for produto in cls.objetos], arquivo, index = 5) 
+            #vars - converte um objeto em dicionario
+            #dump - pega a lista de obejtos e salva no arquivo
+            
+    @classmethod
+    def abrir(cls):
+        cls.objetos = []
+        try:
+            with open("produtos.json", mode="r") as arquivo:
+                produtos_json = json.load(arquivo)
+                for obj in produtos_json:
+                    c = Produto(obj["id"], obj["descricao"], obj["preco"], obj["estoque"], obj["id_categoria"])
+                    cls.objetos.append(c)    
+        except FileNotFoundError:
+            pass

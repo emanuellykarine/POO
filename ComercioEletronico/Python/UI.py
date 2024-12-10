@@ -11,13 +11,15 @@ class UI:
             op = UI.menu()
             if op == 1: UI.listar_clientes()
             if op == 2: UI.inserir_cliente()
+            if op == 3: UI.atualizar_cliente()
             if op == 4: UI.excluir_cliente()
             if op == 9: print("Programa finalizado")
 
     @classmethod
     def excluir_cliente(cls):
         id = int(input("Informe o id do cliente que deseja excluir: "))
-        Clientes.excluir(id)
+        cliente = Cliente(id, "", "", "")
+        Clientes.excluir(cliente)
 
     @classmethod 
     def inserir_cliente(cls):

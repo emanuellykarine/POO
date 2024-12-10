@@ -37,4 +37,4 @@ class Venda_item:
         return self.__idProduto
     
     def __str__(self):
-        return f"{self.__id} - {self.__qtd} - {self.__preco} - {self.__idVenda} - {self.__idProduto}"
+        return f"{self.get_id()} - {self.get_qtd()} - {self.get_preco()} - {self.get_idVenda()} - {self.get_idProduto()}"
