@@ -1,11 +1,12 @@
 import json
 
 class Cliente:
-    def __init__(self, id, nome, email, fone): #atributo de instancia
+    def __init__(self, id, nome, email, fone, senha): #atributo de instancia
         self.set_id(id)
         self.set_nome(nome)
         self.set_email(email)
         self.set_fone(fone)
+        self.set_senha(senha)
     
     def set_id(self, id):
         self.__id = id
@@ -19,6 +20,9 @@ class Cliente:
     def set_fone(self, f):
         self.__fone = f
 
+    def set_senha(self, s):
+        self.__senha = s
+
     def get_nome(self):
         return self.__nome
 
@@ -30,13 +34,20 @@ class Cliente:
     
     def get_id(self):
         return self.__id
+
+    def get_senha(self):
+        return self.__senha
     
     def __str__(self):
         return f"{self.get_id()} - {self.get_nome()} - {self.get_email()} - {self.get_fone()}"
     
     def to_dict(self):
         return {
-            "id": self.get_id(), "nome": self.get_nome(), "email": self.get_email(), "fone": self.get_fone()
+            "id": self.get_id(), 
+            "nome": self.get_nome(), 
+            "email": self.get_email(), 
+            "fone": self.get_fone(),
+            "senha": self.get_senha()
         }
     
 class Clientes:
@@ -96,7 +107,7 @@ class Clientes:
             with open("clientes.json", mode="r") as arquivo:
                 clientes_json = json.load(arquivo)
                 for obj in clientes_json:
-                    c = Cliente(obj["id"], obj["nome"], obj["email"], obj["fone"])
+                    c = Cliente(obj["id"], obj["nome"], obj["email"], obj["fone"], obj["senha"])
                     cls.objetos.append(c)    
         except FileNotFoundError:
             pass

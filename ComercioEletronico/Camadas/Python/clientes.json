@@ -2,13 +2,8 @@
     {
         "id": 1,
         "nome": "Manu",
-        "email": "emanuellyfernandes@gmail.com",
-        "fone": "9119191919"
-    },
-    {
-        "id": 2,
-        "nome": "kaua",
-        "email": "kakakak@gmail.com",
-        "fone": "99999999"
+        "email": "emanuelly@gmail.com",
+        "fone": "9999999",
+        "senha": "1234"
     }
 ]

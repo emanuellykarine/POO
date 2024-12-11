@@ -7,16 +7,24 @@ class View:
     def cliente_listar():
         return Clientes.listar()
     @staticmethod
-    def cliente_inserir(nome, email, fone):
-        c = Cliente(0, nome, email, fone)
+    def cliente_inserir(nome, email, fone, senha):
+        clientes = Clientes.listar()
+        for cliente in clientes:
+            if email == cliente.get_email():
+                raise ValueError("Email já cadastrado")
+        c = Cliente(0, nome, email, fone, senha)
         Clientes.inserir(c)
     @staticmethod
-    def cliente_atualizar(id, nome, email, fone):
-        c = Cliente(id, nome, email, fone)
+    def cliente_atualizar(id, nome, email, fone, senha):
+        clientes = Clientes.listar()
+        for cliente in clientes:
+            if email == cliente.get_email():
+                raise ValueError("Email já cadastrado")
+        c = Cliente(id, nome, email, fone, senha)
         Clientes.atualizar(c)
     @staticmethod
     def cliente_excluir(id):
-        c = Cliente(id, "", "", "")
+        c = Cliente(id, "", "", "", "")
         Clientes.excluir(c)
 
 

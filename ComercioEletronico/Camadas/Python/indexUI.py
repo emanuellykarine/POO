@@ -1,6 +1,7 @@
 import streamlit as st
-from ComercioEletronico.Camadas.Python.templates.manterClienteUI import ManterClienteUI
-from ComercioEletronico.Camadas.Python.templates.manterCategoriaUI import ManterCategoriaUI
+from templates.manterClienteUI import ManterClienteUI
+from templates.manterCategoriaUI import ManterCategoriaUI
+from views import View
 class indexUI:
     def main():
         op = st.sidebar.selectbox("Menu", ["Cliente", "Categoria", "Produto"])
