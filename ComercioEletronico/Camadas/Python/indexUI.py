@@ -4,13 +4,13 @@ from templates.manterProdutoUI import ManterProdutoUI
 from templates.manterCategoriaUI import ManterCategoriaUI
 from templates.abrirContaUI import AbrirContaUI
 from templates.loginUI import LoginUI
-from views import View
+from view.views import View
 
 class IndexUI:
     def menu_visitante():
         op = st.sidebar.selectbox("Menu", ["Entrar no sistema", "Abrir conta"])
         if op == "Entrar no sistema": LoginUI.main()
-        if op == "Abrir conta": AbrirContaUI()
+        if op == "Abrir conta": AbrirContaUI.main()
 
     def menu_admin():
         op = st.sidebar.selectbox("Menu", ["Cadastro de clientes", "Cadastro de categoria", "Cadastro de produtos", "Visualizar pedidos"])

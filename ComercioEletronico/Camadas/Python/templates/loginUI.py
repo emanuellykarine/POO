@@ -1,5 +1,5 @@
 import streamlit as st
-from views import View 
+from view.views import View 
 import time
 
 class LoginUI:

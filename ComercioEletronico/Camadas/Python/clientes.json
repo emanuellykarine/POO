@@ -5,5 +5,12 @@
         "email": "emanuelly@gmail.com",
         "fone": "9999999",
         "senha": "1234"
+    },
+    {
+        "id": 2,
+        "nome": "admin",
+        "email": "admin",
+        "fone": "0000",
+        "senha": "1234"
     }
 ]
