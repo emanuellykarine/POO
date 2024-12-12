@@ -8,8 +8,8 @@ class View:
     def cliente_admin():
         clientes = Clientes.listar()
         for cliente in clientes:
-            if cliente.get_email() == "admin": return None
-        View.cliente_inserir("admin", "admin", "0000", "1234")
+            if cliente.get_email() == "admin@gmail.com": return None
+        View.cliente_inserir("admin", "admin@gmail.com", "0000", "1234")
     
     @staticmethod
     def cliente_autenticar(email, senha):
@@ -81,7 +81,7 @@ class View:
     @staticmethod
     def produto_reajustar(percentual):
         for obj in View.produto_listar():
-            View.produto_atualizar(obj.id, obj.descricao, obj.preco * (1 + percentual), obj.estoque, obj.id_categoria)
+            View.produto_atualizar(obj.get_id(), obj.get_descricao(), obj.get_preco() * (1 + percentual), obj.get_estoque())
         
     @classmethod
     def venda_inserir(cls, obj):

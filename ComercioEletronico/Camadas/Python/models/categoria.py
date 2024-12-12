@@ -70,7 +70,7 @@ class Categorias:
     @classmethod
     def salvar(cls):
         with open("categorias.json", mode="w") as arquivo:
-            json.dump([categoria.to_dict() for categoria in cls.objetos], arquivo, index=2)
+            json.dump([categoria.to_dict() for categoria in cls.objetos], arquivo, indent=2)
     
     @classmethod
     def abrir(cls):
@@ -78,8 +78,8 @@ class Categorias:
         cls.objetos = []
         try:
             with open("categorias.json", mode="r") as arquivo:
-                objetos_json = json.load(arquivo)
-                for obj in objetos_json:
+                categorias_json = json.load(arquivo)
+                for obj in categorias_json:
                     c = Categoria(obj["id"], obj["descricao"])
                     cls.objetos.append(c)    
         except FileNotFoundError:

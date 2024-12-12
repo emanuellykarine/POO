@@ -24,9 +24,14 @@ class ManterProdutoUI:
         descricao = st.text_input("Informe a descricao")
         preco = st.text_input("Informe o preço")
         estoque = st.text_input("Informe o estoque")
+        categorias = View.categoria_listar()
+        if len(categorias) == 0:
+            st.write("Nenhuma categoria cadastrada")
+        else:
+            categoria = st.selectbox("Selecione a categoria", categorias)
 
         if st.button("Inserir"):
-            View.produto_inserir(descricao, preco, estoque)
+            View.produto_inserir(descricao, preco, estoque, categoria.get_id())
             st.success("Produto adicionado")
             time.sleep(2)
             st.rerun()
@@ -53,9 +58,14 @@ class ManterProdutoUI:
             descricao = st.text_input("Informe a nova descricao", selecionado.get_descricao())
             preco = st.text_input("Informe o novo preço", selecionado.get_preco())
             estoque = st.text_input("Informe o novo estoque", selecionado.get_estoque())
+            categorias = View.categoria_listar()
+            if len(categorias) == 0:
+                st.write("Nenhuma categoria cadastrada")
+            else:
+                categoria = st.selectbox("Selecione a categoria", categorias)
 
             if st.button("Atualizar"):
-                View.produto_atualizar(selecionado.get_id(), descricao, preco, estoque)
+                View.produto_atualizar(selecionado.get_id(), descricao, preco, estoque, categoria.get_id())
                 st.success("Produto atualizado")
                 time.sleep(2)
                 st.rerun()

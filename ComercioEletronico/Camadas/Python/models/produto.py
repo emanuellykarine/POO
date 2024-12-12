@@ -1,11 +1,12 @@
 import json
 
 class Produto:
-    def __init__(self, id, d, p, e):
+    def __init__(self, id, d, p, e, id_categoria):
         self.set_id(id)
         self.set_descricao(d)
         self.set_preco(p)
         self.set_estoque(e)
+        self.set_id_categoria(id_categoria)
 
     def set_id(self, id):
         self.__id = id
@@ -19,8 +20,8 @@ class Produto:
     def set_estoque(self, e):
         self.__estoque = e
     
-    def set_idCategoria(self, idCategoria):
-        self.__idCategoria = idCategoria
+    def set_id_categoria(self, id_categoria):
+        self.__id_categoria = id_categoria
 
     def get_id(self):
         return self.__id
@@ -34,19 +35,19 @@ class Produto:
     def get_estoque(self):
         return self.__estoque
     
-    def get_idCategoria(self):
-        return self.__idCategoria
+    def get_id_categoria(self):
+        return self.__id_categoria
     
     def __str__(self):
-        return f"{self.get_id()} - {self.get_descricao()} - {self.get_preco()} - {self.get_estoque()} - {self.get_idCategoria()}"
+        return f"{self.get_id()} - {self.get_descricao()} - {self.get_preco()} - {self.get_estoque()} - {self.get_id_categoria()}"
     
     def to_dict(self):
         return {
             "id": self.get_id(), 
             "descricao": self.get_descricao(), 
-            "preço": self.get_preco(), 
+            "preco": self.get_preco(), 
             "estoque": self.get_estoque(), 
-            "id categoria": self.get_idCategoria()
+            "id_categoria": self.get_id_categoria()
         }
     
 class Produtos:
@@ -96,7 +97,7 @@ class Produtos:
     @classmethod
     def salvar(cls):
         with open("produtos.json", mode="w") as arquivo:
-            json.dump([produto.to_dict() for produto in cls.objetos], arquivo, index = 5) 
+            json.dump([produto.to_dict() for produto in cls.objetos], arquivo, indent=5) 
             #vars - converte um objeto em dicionario
             #dump - pega a lista de obejtos e salva no arquivo
             

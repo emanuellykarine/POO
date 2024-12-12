@@ -1,16 +1,16 @@
 [
     {
         "id": 1,
-        "nome": "Manu",
-        "email": "emanuelly@gmail.com",
-        "fone": "9999999",
+        "nome": "admin",
+        "email": "admin@gmail.com",
+        "fone": "0000",
         "senha": "1234"
     },
     {
         "id": 2,
-        "nome": "admin",
-        "email": "admin",
-        "fone": "0000",
+        "nome": "emanuelly",
+        "email": "emanuellyfernandes77@gmail.com",
+        "fone": "12333333333",
         "senha": "1234"
     }
 ]
