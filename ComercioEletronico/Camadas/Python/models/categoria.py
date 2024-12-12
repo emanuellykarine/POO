@@ -54,7 +54,7 @@ class Categorias:
     
     @classmethod
     def atualizar(cls, obj):
-        x = cls.listar_id(obj.id)
+        x = cls.listar_id(obj.get_id())
         if x != None:
             cls.objetos.remove(x)
             cls.objetos.append(obj)
@@ -62,7 +62,7 @@ class Categorias:
 
     @classmethod
     def excluir(cls, obj):
-        x = cls.listar_id(obj.id)
+        x = cls.listar_id(obj.get_id())
         if x != None:
             cls.objetos.remove(x)
             cls.salvar()     

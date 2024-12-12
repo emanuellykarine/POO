@@ -1,8 +1,24 @@
 from models.cliente import Cliente, Clientes
 from models.categoria import Categoria, Categorias
 from models.produto import Produto, Produtos
+from models.venda import Venda, Vendas
 
 class View:
+    @staticmethod
+    def cliente_admin():
+        clientes = Clientes.listar()
+        for cliente in clientes:
+            if cliente.get_email() == "admin": return None
+        View.cliente_inserir("admin", "admin", "0000", "1234")
+    
+    @staticmethod
+    def cliente_autenticar(email, senha):
+        clientes = Clientes.listar()
+        for cliente in clientes:
+            if cliente.get_email() == email and cliente.get_senha() == senha:
+                return {"id": cliente.get_id(), "nome": cliente.get_nome()}
+        return None
+    
     @staticmethod
     def cliente_listar():
         return Clientes.listar()
@@ -67,3 +83,13 @@ class View:
         for obj in View.produto_listar():
             View.produto_atualizar(obj.id, obj.descricao, obj.preco * (1 + percentual), obj.estoque, obj.id_categoria)
         
+    @classmethod
+    def venda_inserir(cls, obj):
+        v = Venda(obj)
+        Vendas.inserir(v)
+    @classmethod
+    def venda_listar(cls):
+        return Vendas.listar()
+    @classmethod
+    def venda_listar_id(cls, id):
+        return Vendas.listar_id(id)
