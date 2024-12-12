@@ -1,8 +1,12 @@
 import json
 
 class Venda:
-    def __init__(self, id):
+    def __init__(self, id, data, carrinho, total, id_cliente):
         self.set_id(id)
+        self.set_data(data)
+        self.set_carrinho(carrinho)
+        self.set_total(total)
+        self.set_id_cliente(id_cliente)
 
     def set_id(self, id):
         self.__id = id
@@ -16,8 +20,8 @@ class Venda:
     def set_total(self, total):
         self.__total = total
     
-    def set_idCliente(self, idCliente):
-        self.__idCliente = idCliente
+    def set_id_cliente(self, id_cliente):
+        self.__id_cliente = id_cliente
 
     def get_id(self):
         return self.__id
@@ -31,11 +35,20 @@ class Venda:
     def get_total(self):
         return self.__total
     
-    def get_idCliente(self):
-        return self.__idCliente
+    def get_id_cliente(self):
+        return self.__id_cliente
 
     def __str__(self):
-        return f"{self.get_id()} - {self.get_data()} - {self.get_carrinho()} - {self.get_total()} - {self.get_idCliente()}"
+        return f"{self.get_id()} - {self.get_data()} - {self.get_carrinho()} - {self.get_total()} - {self.get_id_cliente()}"
+    
+    def to_dict(self):
+        return {
+            "id": self.get_id(), 
+            "data": self.get_data(), 
+            "carrinho": self.get_carrinho(), 
+            "total": self.get_total(), 
+            "id_cliente": self.get_id_cliente()
+        }
     
 class Vendas:
     objetos = []
@@ -59,3 +72,37 @@ class Vendas:
             return venda_listar
         else:
             print("Venda não cadastrada")
+
+    @classmethod
+    def atualizar(cls, obj):
+        venda = cls.listar_id(obj.get_id())
+        if venda != None:
+            cls.objetos.remove(venda)
+            cls.objetos.append(obj)
+            cls.salvar()
+
+    @classmethod
+    def excluir(cls, obj):
+        venda = cls.listar_id(obj.get_id())
+        if venda != None:
+            cls.objetos.remove(venda)
+            cls.salvar()
+
+    @classmethod
+    def salvar(cls):
+        with open("vendas.json", mode="w") as arquivo:
+            json.dump([venda.to_dict() for venda in cls.objetos], arquivo, indent=5) 
+            #vars - converte um objeto em dicionario
+            #dump - pega a lista de obejtos e salva no arquivo
+            
+    @classmethod
+    def abrir(cls):
+        cls.objetos = []
+        try:
+            with open("vendas.json", mode="r") as arquivo:
+                vendas_json = json.load(arquivo)
+                for obj in vendas_json:
+                    c = Venda(obj["id"], obj["data"], obj["carrinho"], obj["total"], obj["id_cliente"])
+                    cls.objetos.append(c)    
+        except FileNotFoundError:
+            pass
