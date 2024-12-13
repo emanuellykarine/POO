@@ -1,4 +1,5 @@
 import json
+from datetime import date
 
 class Venda:
     def __init__(self, id, data, carrinho, total, id_cliente):
@@ -12,7 +13,11 @@ class Venda:
         self.__id = id
     
     def set_data(self, data):
-        self.__data = data
+        if data != None:
+            self.__data = data
+        else:
+            dia_atual = date.today()
+            self.__data = dia_atual.isoformat()
 
     def set_carrinho(self, carrinho):
         self.__carrinho = carrinho
@@ -39,7 +44,7 @@ class Venda:
         return self.__id_cliente
 
     def __str__(self):
-        return f"{self.get_id()} - {self.get_data()} - {self.get_carrinho()} - {self.get_total()} - {self.get_id_cliente()}"
+        return f"id: {self.get_id()} - data: {self.get_data()} - situação: {self.get_carrinho()} - total: {self.get_total()} - id cliente: {self.get_id_cliente()}"
     
     def to_dict(self):
         return {
@@ -55,23 +60,29 @@ class Vendas:
 
     @classmethod
     def inserir(cls, obj):
+        cls.abrir()
+        
+        #calcular o id do objeto
+        id = 0
+        for venda in cls.objetos:
+            if venda.get_id() > id: id = venda.get_id()
+        obj.set_id(id + 1)
+
         cls.objetos.append(obj)
+        cls.salvar()
 
     @classmethod
     def listar(cls):
+        cls.abrir()
         return cls.objetos
     
     @classmethod
     def listar_id(cls, id):
-        venda_listar= None
+        cls.abrir()
+        # percorre a lista procurando o id    
         for venda in cls.objetos:
-            if venda.get_id() == id:
-                venda_listar = venda
-                
-        if venda_listar:
-            return venda_listar
-        else:
-            print("Venda não cadastrada")
+            if venda.get_id() == id: return venda
+        return None
 
     @classmethod
     def atualizar(cls, obj):

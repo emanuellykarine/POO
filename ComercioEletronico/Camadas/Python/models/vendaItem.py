@@ -55,23 +55,29 @@ class Venda_itens:
 
     @classmethod
     def inserir(cls, obj):
+        cls.abrir()
+        
+        #calcular o id do objeto
+        id = 0
+        for venda_item in cls.objetos:
+            if venda_item.get_id() > id: id = venda_item.get_id()
+        obj.set_id(id + 1)
+
         cls.objetos.append(obj)
+        cls.salvar()
 
     @classmethod
     def listar(cls):
+        cls.abrir()
         return cls.objetos
     
     @classmethod
     def listar_id(cls, id):
-        venda_itens_listar= None
+        cls.abrir()
+        # percorre a lista procurando o id    
         for venda_item in cls.objetos:
-            if venda_item.get_id() == id:
-                venda_itens_listar = venda_item
-                
-        if venda_itens_listar:
-            return venda_itens_listar
-        else:
-            print("Venda não cadastrada")
+            if venda_item.get_id() == id: return venda_item
+        return None
 
     @classmethod
     def atualizar(cls, obj):
@@ -90,7 +96,7 @@ class Venda_itens:
 
     @classmethod
     def salvar(cls):
-        with open("vendas_itens.json", mode="w") as arquivo:
+        with open("venda_itens.json", mode="w") as arquivo:
             json.dump([venda_item.to_dict() for venda_item in cls.objetos], arquivo, indent=5) 
             #vars - converte um objeto em dicionario
             #dump - pega a lista de obejtos e salva no arquivo
@@ -99,9 +105,9 @@ class Venda_itens:
     def abrir(cls):
         cls.objetos = []
         try:
-            with open("vendas.json", mode="r") as arquivo:
-                vendas_item_json = json.load(arquivo)
-                for obj in vendas_item_json:
+            with open("venda_itens.json", mode="r") as arquivo:
+                venda_item_json = json.load(arquivo)
+                for obj in venda_item_json:
                     c = Venda_item(obj["id"], obj["qtd"], obj["preco"], obj["id_venda"], obj["id_produto"])
                     cls.objetos.append(c)    
         except FileNotFoundError:

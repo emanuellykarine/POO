@@ -5,6 +5,7 @@ from templates.manterCategoriaUI import ManterCategoriaUI
 from templates.reajustarProdutoUI import ReajustarProduto
 from templates.clienteProduto import ClienteProdutoUI
 from templates.abrirContaUI import AbrirContaUI
+from templates.visualizarPedidosUI import VisualizarPedidosUI
 from templates.loginUI import LoginUI
 from view.views import View
 
@@ -20,15 +21,15 @@ class IndexUI:
         if op == "Cadastro de categoria": ManterCategoriaUI.main()
         if op == "Cadastro de produtos": ManterProdutoUI.main()
         if op == "Reajustar preço de produto": ReajustarProduto.main()
+        if op == "Visualizar pedidos": VisualizarPedidosUI.main()
 
     def menu_cliente():
-        op = st.sidebar.selectbox("Menu", ["Listar produtos", "Inserir no carrinho", "Finalizar pedido", "Visualizar pedido", "Excluir produto do carrinho"])
+        op = st.sidebar.selectbox("Menu", ["Listar produtos", "Inserir no carrinho", "Visualizar pedido", "Finalizar pedido"])
         if op == "Listar produtos": ClienteProdutoUI.produto_listar()
         if op == "Inserir no carrinho": ClienteProdutoUI.produto_inserir()
-        if op == "Finalizar pedido": ClienteProdutoUI.comprar()
         if op == "Visualizar pedido": ClienteProdutoUI.pedido_visualizar()
-        if op == "Excluir produto do carrinho": ClienteProdutoUI.produto_excluir()
-    
+        if op == "Finalizar pedido": ClienteProdutoUI.comprar()
+
     def sair_do_sistema():
         if st.sidebar.button("Sair"):
             del st.session_state["cliente_id"]

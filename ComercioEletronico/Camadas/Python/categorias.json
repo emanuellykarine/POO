@@ -2,5 +2,13 @@
   {
     "id": 1,
     "descricao": "produtos eletronicos"
+  },
+  {
+    "id": 2,
+    "descricao": "comida"
+  },
+  {
+    "id": 3,
+    "descricao": "movel"
   }
 ]

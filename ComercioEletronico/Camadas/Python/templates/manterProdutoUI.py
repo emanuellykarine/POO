@@ -22,8 +22,8 @@ class ManterProdutoUI:
     @classmethod 
     def produto_inserir(cls):
         descricao = st.text_input("Informe a descricao")
-        preco = st.text_input("Informe o preço")
-        estoque = st.text_input("Informe o estoque")
+        preco = st.number_input("Informe o preço", value = 0, step = 1)
+        estoque = st.number_input("Informe a quantidade no estoque", value = 0, step = 1)
         categorias = View.categoria_listar()
         if len(categorias) == 0:
             st.write("Nenhuma categoria cadastrada")
@@ -45,6 +45,14 @@ class ManterProdutoUI:
             dic = []
             for obj in produtos: dic.append(obj.__dict__)
             df = pd.DataFrame(dic)
+
+            df.rename(columns={
+                '_Produto__id': "ID",
+                '_Produto__descricao':'Descrição',
+                '_Produto__preco': 'Preço (R$)',
+                '_Produto__estoque': 'Estoque',
+                '_Produto__id_categoria': 'Categoria'
+            }, inplace=True)
             st.dataframe(df)
 
     @classmethod 
@@ -56,8 +64,8 @@ class ManterProdutoUI:
             selecionado = st.selectbox("Atualização de produtos", produtos)
 
             descricao = st.text_input("Informe a nova descricao", selecionado.get_descricao())
-            preco = st.text_input("Informe o novo preço", selecionado.get_preco())
-            estoque = st.text_input("Informe o novo estoque", selecionado.get_estoque())
+            preco = st.number_input("Informe o preço", value = selecionado.get_preco(), step = 1)
+            estoque = st.number_input("Informe a nova quantidade no estoque", value = selecionado.get_estoque(), step = 1)
             categoria = st.text_input("Informe a nova categoria", selecionado.get_descricao())
 
             if st.button("Atualizar"):
@@ -79,3 +87,4 @@ class ManterProdutoUI:
                 st.success("produto excluído")
                 time.sleep(2)
                 st.rerun()
+    

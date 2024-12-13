@@ -19,7 +19,6 @@ class View:
             if cliente.get_email() == email and cliente.get_senha() == senha:
                 return {"id": cliente.get_id(), "nome": cliente.get_nome()}
         return None
-    
     @staticmethod
     def cliente_listar():
         return Clientes.listar()
@@ -80,24 +79,40 @@ class View:
         p = Produto(id, "", 0, 0, None)
         Produtos.excluir(p)
     @staticmethod
-    def produto_reajustar(percentual):
+    def produto_reajustar(percentual, id):
         for obj in View.produto_listar():
-            View.produto_atualizar(obj.get_id(), obj.get_descricao(), obj.get_preco() * (1 + percentual), obj.get_estoque())
+            if obj.get_id() == id:
+                p = Produto(obj.get_id(), obj.get_descricao(), obj.get_preco() * (1 + percentual), obj.get_estoque())
+                Produtos.atualizar(p)
         
-    @classmethod
-    def venda_inserir(cls, obj):
-        v = Venda(obj)
-        Vendas.inserir(v)
-    @classmethod
-    def venda_listar(cls):
-        return Vendas.listar()
-    @classmethod
-    def venda_listar_id(cls, id):
-        return Vendas.listar_id(id)
     @staticmethod
-    def venda_inserir(data, carrinho, total, id_cliente):
-        v = Venda(0, data, carrinho, total, id_cliente)
-        Vendas.inserir(v)
+    def venda_inserir(carrinho, total, id_cliente):
+        compra = False
+        for venda in Vendas.listar():
+            if venda.get_id_cliente() == id_cliente and venda.get_carrinho() == False:  
+                compra = True
+                break
+        if compra == False:
+            v = Venda(0, None, carrinho, total, id_cliente)
+            Vendas.inserir(v)
+    def venda_confirmar(id_cliente):
+         for venda in Vendas.listar():
+            if venda.get_id_cliente() == id_cliente and venda.get_carrinho() == False:
+                id = venda.get_id()
+                data = venda.get_data()
+                carrinho = True
+                total = venda.get_total()
+                id_cliente = venda.get_id_cliente()
+                v = Venda(id, data, carrinho, total, id_cliente,)
+                Vendas.atualizar(v)
+                v = Venda(0, None, False, 0, id_cliente)
+                Vendas.inserir(v)
+    @staticmethod
+    def venda_listar():
+        return Vendas.listar()
+    @staticmethod
+    def venda_listar_id(id):
+        return Vendas.listar_id(id)
     @staticmethod
     def venda_atualizar(id, data, carrinho, total, id_cliente):
         v = Venda(id, data, carrinho, total, id_cliente)
@@ -107,15 +122,12 @@ class View:
         v = Venda(id, "", "", "", "")
         Vendas.excluir(v)
     
-    @classmethod
-    def venda_item_inserir(cls, obj):
-        v = Venda_item(obj)
-        Venda_itens.inserir(v)
-    @classmethod
-    def venda_item_listar(cls):
+ 
+    @staticmethod
+    def venda_item_listar():
         return Venda_itens.listar()
-    @classmethod
-    def venda_item_listar_id(cls, id):
+    @staticmethod
+    def venda_item_listar_id( id):
         return Venda_itens.listar_id(id)
     @staticmethod
     def venda_item_inserir(q, p, id_venda, id_produto):

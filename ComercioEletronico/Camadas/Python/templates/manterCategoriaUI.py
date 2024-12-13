@@ -38,6 +38,10 @@ class ManterCategoriaUI:
             dic = []
             for obj in categorias: dic.append(obj.__dict__)
             df = pd.DataFrame(dic)
+            df.rename(columns={
+                '_Categoria__id': "ID",
+                '_Categoria__d':'Descrição',
+            }, inplace=True)
             st.dataframe(df)
 
     @classmethod 

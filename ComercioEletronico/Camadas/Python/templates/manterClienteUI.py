@@ -41,6 +41,13 @@ class ManterClienteUI:
             dic = []
             for obj in clientes: dic.append(obj.__dict__)
             df = pd.DataFrame(dic)
+            df.rename(columns={
+                '_Cliente__id': "ID",
+                '_Cliente__nome':'Nome',
+                '_Cliente__email': 'E-mail',
+                '_Cliente__fone': 'Fone',
+                '_Cliente__senha': 'Senha'
+            }, inplace=True)
             st.dataframe(df)
 
     @classmethod 

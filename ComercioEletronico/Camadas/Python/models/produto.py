@@ -39,7 +39,7 @@ class Produto:
         return self.__id_categoria
     
     def __str__(self):
-        return f"{self.get_id()} - {self.get_descricao()} - {self.get_preco()} - {self.get_estoque()} - {self.get_id_categoria()}"
+        return f"id: {self.get_id()} - descrição: {self.get_descricao()}  - preço: R${self.get_preco()}  - Quantidade disponível:{self.get_estoque()} - Categoria:{self.get_id_categoria()}"
     
     def to_dict(self):
         return {
