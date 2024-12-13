@@ -95,8 +95,9 @@ class View:
         if compra == False:
             v = Venda(0, None, carrinho, total, id_cliente)
             Vendas.inserir(v)
+    @staticmethod
     def venda_confirmar(id_cliente):
-         for venda in Vendas.listar():
+        for venda in Vendas.listar():
             if venda.get_id_cliente() == id_cliente and venda.get_carrinho() == False:
                 id = venda.get_id()
                 data = venda.get_data()
