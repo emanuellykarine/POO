@@ -44,7 +44,7 @@ class Venda:
         return self.__id_cliente
 
     def __str__(self):
-        return f"id: {self.get_id()} - data: {self.get_data()} - situação: {self.get_carrinho()} - total: {self.get_total()} - id cliente: {self.get_id_cliente()}"
+        return f"ID = {self.get_id()}  |  DATA = {self.get_data()}  |  CONFIRMADA = {self.get_carrinho()}  |  TOTAL = {self.get_total()}  |  ID CLIENTE = {self.get_id_cliente()}"
     
     def to_dict(self):
         return {

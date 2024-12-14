@@ -24,9 +24,11 @@ class IndexUI:
         if op == "Visualizar pedidos": VisualizarPedidosUI.main()
 
     def menu_cliente():
-        op = st.sidebar.selectbox("Menu", ["Listar produtos", "Inserir no carrinho", "Visualizar pedido", "Finalizar pedido"])
+        op = st.sidebar.selectbox("Menu", ["Listar produtos", "Inserir no carrinho", "Excluir do carrinho", "Atualizar carrinho", "Visualizar pedido", "Finalizar pedido"])
         if op == "Listar produtos": ClienteProdutoUI.produto_listar()
         if op == "Inserir no carrinho": ClienteProdutoUI.produto_inserir()
+        if op == "Excluir do carrinho": ClienteProdutoUI.produto_excluir()
+        if op == "Atualizar carrinho": ClienteProdutoUI.produto_atualizar()
         if op == "Visualizar pedido": ClienteProdutoUI.pedido_visualizar()
         if op == "Finalizar pedido": ClienteProdutoUI.comprar()
 

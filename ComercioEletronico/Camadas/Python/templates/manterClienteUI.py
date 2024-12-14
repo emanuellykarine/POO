@@ -48,7 +48,7 @@ class ManterClienteUI:
                 '_Cliente__fone': 'Fone',
                 '_Cliente__senha': 'Senha'
             }, inplace=True)
-            st.dataframe(df)
+            st.dataframe(df, hide_index=True)
 
     @classmethod 
     def cliente_atualizar(cls):

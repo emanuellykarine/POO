@@ -42,7 +42,7 @@ class ManterCategoriaUI:
                 '_Categoria__id': "ID",
                 '_Categoria__d':'Descrição',
             }, inplace=True)
-            st.dataframe(df)
+            st.dataframe(df, hide_index=True)
 
     @classmethod 
     def categoria_atualizar(cls):

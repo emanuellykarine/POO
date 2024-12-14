@@ -18,7 +18,7 @@ class Categoria:
         return self.__d
 
     def __str__(self):
-        return f"{self.get_id()} - {self.get_descricao()}"
+        return f"ID = {self.get_id()}  |  DESCRIÇÃO = {self.get_descricao()}"
     
     def to_dict(self):
         return {

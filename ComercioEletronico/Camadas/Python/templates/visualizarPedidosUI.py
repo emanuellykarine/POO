@@ -21,4 +21,4 @@ class VisualizarPedidosUI:
                 '_Venda__total': 'Total carrinho (R$)',
                 '_Venda__id_cliente': 'ID cliente'
             }, inplace=True)
-            st.dataframe(df)
+            st.dataframe(df, hide_index=True)

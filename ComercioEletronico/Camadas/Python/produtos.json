@@ -1,23 +1,23 @@
 [
      {
           "id": 2,
-          "descricao": "celular",
-          "preco": 1000,
-          "estoque": 3,
-          "id_categoria": "celular"
-     },
-     {
-          "id": 1,
-          "descricao": "arroz",
-          "preco": 10,
-          "estoque": 6,
-          "id_categoria": "arroz"
+          "descricao": "armario",
+          "preco": 2000,
+          "estoque": 7,
+          "id_categoria": 3
      },
      {
           "id": 3,
-          "descricao": "guarda-roupa",
-          "preco": 2000,
-          "estoque": 3,
-          "id_categoria": "guarda-roupa"
+          "descricao": "arroz",
+          "preco": 8,
+          "estoque": 4,
+          "id_categoria": 2
+     },
+     {
+          "id": 1,
+          "descricao": "celular",
+          "preco": 1000,
+          "estoque": 4,
+          "id_categoria": 1
      }
 ]

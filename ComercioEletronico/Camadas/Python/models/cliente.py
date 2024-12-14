@@ -39,7 +39,7 @@ class Cliente:
         return self.__senha
     
     def __str__(self):
-        return f"{self.get_id()} - {self.get_nome()} - {self.get_email()} - {self.get_fone()}"
+        return f"ID = {self.get_id()}  |  NOME = {self.get_nome()}  |  EMAIL = {self.get_email()}  |  FONE = {self.get_fone()}"
     
     def to_dict(self):
         return {

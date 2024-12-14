@@ -39,7 +39,7 @@ class Venda_item:
         return self.__id_produto
     
     def __str__(self):
-        return f"{self.get_id()} - {self.get_qtd()} - {self.get_preco()} - {self.get_id_venda()} - {self.get_id_produto()}"
+        return f"ID = {self.get_id()}  |  QTD = {self.get_qtd()}  |  PREÇO = R${self.get_preco()}  |  ID VENDA = {self.get_id_venda()}  |  ID PRODUTO = {self.get_id_produto()}"
 
     def to_dict(self):
         return {

@@ -31,19 +31,30 @@ class ManterProdutoUI:
             categoria = st.selectbox("Selecione a categoria", categorias)
 
         if st.button("Inserir"):
-            View.produto_inserir(descricao, preco, estoque, categoria.get_descricao())
+            View.produto_inserir(descricao, preco, estoque, categoria.get_id())
             st.success("Produto adicionado")
             time.sleep(2)
             st.rerun()
 
-    @classmethod 
-    def produto_listar(cls):
+    @staticmethod
+    def produto_listar():
+        st.header("Produtos disponíveis")
         produtos = View.produto_listar()
+        categorias = View.categoria_listar()
         if len(produtos) == 0:
             st.write("Nenhum produto cadastrado")
         else:
             dic = []
-            for obj in produtos: dic.append(obj.__dict__)
+            for obj in produtos: 
+                nome_categoria = ""
+                for cat in categorias:
+                    if cat.get_id() == obj.get_id_categoria():
+                        nome_categoria = cat.get_descricao()
+                        break
+
+                produto_dict = obj.__dict__.copy()
+                produto_dict['_Produto__id_categoria'] = nome_categoria
+                dic.append(produto_dict)
             df = pd.DataFrame(dic)
 
             df.rename(columns={
@@ -53,7 +64,7 @@ class ManterProdutoUI:
                 '_Produto__estoque': 'Estoque',
                 '_Produto__id_categoria': 'Categoria'
             }, inplace=True)
-            st.dataframe(df)
+            st.dataframe(df, hide_index=True)
 
     @classmethod 
     def produto_atualizar(cls):
@@ -69,7 +80,7 @@ class ManterProdutoUI:
             categoria = st.text_input("Informe a nova categoria", selecionado.get_descricao())
 
             if st.button("Atualizar"):
-                View.produto_atualizar(selecionado.get_id(), descricao, preco, estoque, categoria)
+                View.produto_atualizar(selecionado.get_id(), descricao, preco, estoque, categoria.get_id())
                 st.success("Produto atualizado")
                 time.sleep(2)
                 st.rerun()
