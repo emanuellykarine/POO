@@ -82,7 +82,7 @@ class View:
     def produto_reajustar(percentual, id):
         for obj in View.produto_listar():
             if obj.get_id() == id:
-                p = Produto(obj.get_id(), obj.get_descricao(), obj.get_preco() * (1 + percentual), obj.get_estoque())
+                p = Produto(obj.get_id(), obj.get_descricao(), (obj.get_preco() * percentual) + obj.get_preco(), obj.get_estoque(), obj.get_id_categoria())
                 Produtos.atualizar(p)
         
     @staticmethod

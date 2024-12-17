@@ -11,7 +11,7 @@ class ReajustarProduto:
         else:
             selecionado = st.selectbox("Reajuste de preço de produtos", produtos)
 
-            porcentagem = st.number_input("Informe a porcentagem em decimal", value = 0, step = 1)
+            porcentagem = st.number_input("Informe a porcentagem em decimal", value = 0.0, step = 0.01)
 
             if st.button("Reajustar"):
                 View.produto_reajustar(porcentagem, selecionado.get_id())

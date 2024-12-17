@@ -1,12 +1,5 @@
 [
      {
-          "id": 2,
-          "descricao": "armario",
-          "preco": 2000,
-          "estoque": 7,
-          "id_categoria": 3
-     },
-     {
           "id": 3,
           "descricao": "arroz",
           "preco": 8,
@@ -14,9 +7,16 @@
           "id_categoria": 2
      },
      {
+          "id": 2,
+          "descricao": "armario",
+          "preco": 2000,
+          "estoque": 7,
+          "id_categoria": 3
+     },
+     {
           "id": 1,
           "descricao": "celular",
-          "preco": 1000,
+          "preco": 1100.0,
           "estoque": 4,
           "id_categoria": 1
      }
