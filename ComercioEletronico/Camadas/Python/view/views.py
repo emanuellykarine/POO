@@ -28,7 +28,12 @@ class View:
         for cliente in clientes:
             if email == cliente.get_email():
                 raise ValueError("Email já cadastrado")
+        if nome == "":
+            raise ValueError("Nome vazio")
+        if email == "":
+            raise ValueError("Email vazio")
         c = Cliente(0, nome, email, fone, senha)
+
         Clientes.inserir(c)
     @staticmethod
     def cliente_atualizar(id, nome, email, fone, senha):
@@ -36,6 +41,10 @@ class View:
         for cliente in clientes:
             if email == cliente.get_email():
                 raise ValueError("Email já cadastrado")
+        if nome == "":
+            raise ValueError("Nome vazio")
+        if email == "":
+            raise ValueError("Email vazio")
         c = Cliente(id, nome, email, fone, senha)
         Clientes.atualizar(c)
     @staticmethod
@@ -52,10 +61,22 @@ class View:
         return Categorias.listar_id(id)
     @staticmethod
     def categoria_inserir(descricao):
+        categorias = Categoria.listar()
+        for categoria in categorias:
+            if descricao == categoria.get_descricao():
+                raise ValueError("Descrição já cadastrada")
+        if descricao == "":
+            raise ValueError("Descrição vazia")
         c = Categoria(0, descricao)
         Categorias.inserir(c)
     @staticmethod
     def categoria_atualizar(id, descricao):
+        categorias = Categoria.listar()
+        for categoria in categorias:
+            if descricao == categoria.get_descricao():
+                raise ValueError("Descrição já cadastrada")
+        if descricao == "":
+            raise ValueError("Descrição vazia")
         c = Categoria(id, descricao)
         Categorias.atualizar(c)
     @staticmethod
@@ -68,10 +89,26 @@ class View:
         return Produtos.listar()
     @staticmethod
     def produto_inserir(descricao, preco, estoque, id_categoria):
+        if descricao == "":
+            raise ValueError("Descrição vazia")
+        if id_categoria == "":
+            raise ValueError("Categoria vazia")
+        if preco < 0:
+            raise ValueError ("Preço inválido")
+        if estoque < 0:
+            raise ValueError("Estoque inválido")
         p = Produto(0, descricao, preco, estoque, id_categoria)
         Produtos.inserir(p)
     @staticmethod
     def produto_atualizar(id, descricao, preco, estoque, id_categoria):
+        if descricao == "":
+            raise ValueError("Descrição vazia")
+        if id_categoria == "":
+            raise ValueError("Categoria vazia")
+        if preco < 0:
+            raise ValueError ("Preço inválido")
+        if estoque < 0:
+            raise ValueError("Estoque inválido")
         p = Produto(id, descricao, preco, estoque, id_categoria)
         Produtos.atualizar(p)
     @staticmethod
@@ -80,6 +117,8 @@ class View:
         Produtos.excluir(p)
     @staticmethod
     def produto_reajustar(percentual, id):
+        if percentual == "":
+            raise ValueError("Percentual inválido")
         for obj in View.produto_listar():
             if obj.get_id() == id:
                 p = Produto(obj.get_id(), obj.get_descricao(), (obj.get_preco() * percentual) + obj.get_preco(), obj.get_estoque(), obj.get_id_categoria())

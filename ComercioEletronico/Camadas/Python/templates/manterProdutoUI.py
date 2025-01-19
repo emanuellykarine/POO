@@ -31,10 +31,11 @@ class ManterProdutoUI:
             categoria = st.selectbox("Selecione a categoria", categorias)
 
         if st.button("Inserir"):
-            View.produto_inserir(descricao, preco, estoque, categoria.get_id())
-            st.success("Produto adicionado")
-            time.sleep(2)
-            st.rerun()
+            try:
+                View.produto_inserir(descricao, preco, estoque, categoria.get_id())
+                st.success("Produto adicionado")
+            except Exception as erro:
+                st.error(erro.message)
 
     @staticmethod
     def produto_listar():
@@ -80,10 +81,11 @@ class ManterProdutoUI:
             categoria = st.text_input("Informe a nova categoria", selecionado.get_descricao())
 
             if st.button("Atualizar"):
-                View.produto_atualizar(selecionado.get_id(), descricao, preco, estoque, categoria.get_id())
-                st.success("Produto atualizado")
-                time.sleep(2)
-                st.rerun()
+                try:
+                    View.produto_atualizar(selecionado.get_id(), descricao, preco, estoque, categoria.get_id())
+                    st.success("Produto atualizado")
+                except Exception as erro:
+                    st.error(erro.message)
 
     @classmethod 
     def produto_excluir(cls):
